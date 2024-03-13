@@ -8,8 +8,8 @@ public class Pathfinding {
     // 4 Closed
     // 5 Open
     //Positions: 0: x 1:y 2: type 3: Cost 4: ParentX 5: ParentY 6:ParentFromStartCost
-    static int[] start =    {3, 1 , 2 , 0 , 0 , 0,  0};
-    static int[] finish =   {5 ,3 , 3, 0 , 0 ,  0,  0};
+    static int[] start =    {3, 1, 2 , 0 , 0 , 0,  0};
+    static int[] finish =   {6 ,4 , 3, 0 , 0 ,  0,  0};
     static int[] current =  start;
 
     static boolean stepTaken = false;
@@ -121,7 +121,7 @@ public class Pathfinding {
         boolean found = false;
         while (!found){
             found = step();
-            if (open.size()<0){
+            if (open.size()==0){
                 found=true;
                 System.out.println("No Valid Answer");
             }
