@@ -12,7 +12,7 @@ public class Pathfinding {
     static int[] finish =   {5 ,3 , 3, 0 , 0 ,  0,  0};
     static int[] current =  start;
 
-
+    static boolean stepTaken = false;
 
 
 
@@ -32,11 +32,16 @@ public class Pathfinding {
     }
 
     public static boolean menu(){
-        System.out.println("Karte anzeigen.......0");
-        System.out.println("Schritt machen.......1");
-        System.out.println("Ablaufen lassen......2");
-        System.out.println("Pfad Anzeigen........3");
-        System.out.println("Beenden.............-1");
+        System.out.println("Karte anzeigen.........0");
+        System.out.println("Schritt machen.........1");
+        System.out.println("Ablaufen lassen........2");
+        System.out.println("Pfad Anzeigen..........3");
+        if (!stepTaken){
+        System.out.println("Hinderniss Hinzufügen..4");
+        System.out.println("Start Festlegen........5");
+        System.out.println("Ziel Festlegen.........6");
+        }
+        System.out.println("Beenden...............-1");
 
         Scanner scan = new Scanner(System.in);
 
@@ -50,7 +55,36 @@ public class Pathfinding {
                     if (path[i][2] != 0) System.out.println("X:"+ path[i][0] +"Y:"+ path[i][1]);
                 }
             }
+            case 4 -> {
+                System.out.println("X vom Hinderniss");
+                int x = scan.nextInt();
+                System.out.println("Y vom Hinderniss");
+                int y = scan.nextInt();
+                addToMap(new int[]{x,y,1});
+            }
 
+            case 5 -> {
+                System.out.println("X vom Start");
+                int x = scan.nextInt();
+                System.out.println("Y vom Start");
+                int y = scan.nextInt();
+                addToMap(new int[]{start[0],start[1],0});
+                start[0] = x;
+                start[1] = y;
+                addToMap(new int[]{x,y,2});
+            }
+            case 6 -> {
+                System.out.println("X vom Ziel");
+                int x = scan.nextInt();
+                System.out.println("Y vom Ziel");
+                int y = scan.nextInt();
+                addToMap(new int[]{finish[0],finish[1],0});
+                finish[0] = x;
+                finish[1] = y;
+                addToMap(new int[]{x,y,3});
+            }
+
+            default -> System.out.println("Enter Valid Value");
             case -1 -> {
                 return true;
             }
@@ -87,7 +121,7 @@ public class Pathfinding {
         boolean found = false;
         while (!found){
             found = step();
-            if (open.size()==0){
+            if (open.size()<0){
                 found=true;
                 System.out.println("No Valid Answer");
             }
@@ -95,6 +129,7 @@ public class Pathfinding {
     }
 
     private static boolean step(){
+        stepTaken = true;
         int[][] neighbours = getNeighbours(current);
         int[][] openValues  =  open.getValues();
 
