@@ -19,7 +19,7 @@ public class Pathfinding {
 
 
     static byte[][] map = {
-            {0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 1, 0},
             {0, 0, 0, 0, 1, 0, 0},
             {0, 0, 1, 1, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0},
@@ -89,6 +89,10 @@ public class Pathfinding {
         boolean found = false;
         while (!found){
             found = step(it);
+            if (open.size()==0){
+                found=true;
+                System.out.println("No Valid Answer");
+            }
         }
     }
 
