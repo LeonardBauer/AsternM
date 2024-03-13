@@ -14,7 +14,7 @@ public class Pathfinding {
     static int[] finish =   {5 ,3 , 3, 0 , 0 ,  0,  0};
     static int[] current =  start;
 
-    static int it = 0;
+
 
 
 
@@ -44,7 +44,7 @@ public class Pathfinding {
 
         switch (scan.nextInt()){
             case 0 -> anzeigen();
-            case 1 -> step(it);
+            case 1 -> step();
             case 2 -> findPath();
             case 3 -> {
                 int[][] path = retracePath();
@@ -88,7 +88,7 @@ public class Pathfinding {
     private static void findPath(){
         boolean found = false;
         while (!found){
-            found = step(it);
+            found = step();
             if (open.size()==0){
                 found=true;
                 System.out.println("No Valid Answer");
@@ -96,7 +96,7 @@ public class Pathfinding {
         }
     }
 
-    private static boolean step(int iteration){
+    private static boolean step(){
         int[][] neighbours = getNeighbours(current);
         int[][] openValues  =  open.getValues();
 
@@ -132,7 +132,6 @@ public class Pathfinding {
 
         current = open.pop();
 
-        it++;
         return false;
     }
 
